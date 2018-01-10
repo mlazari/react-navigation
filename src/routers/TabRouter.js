@@ -307,10 +307,13 @@ export default (
                 }
               );
               if (tabRouter && tabRouter.getActionForPathAndParams) {
-                action.action = tabRouter.getActionForPathAndParams(
-                  parts.slice(1).join('/'),
-                  params
-                );
+                const tabPath = parts.slice(1).join('/');
+                if (tabPath) {
+                  action.action = tabRouter.getActionForPathAndParams(
+                    tabPath,
+                    params
+                  );
+                }
               } else if (params) {
                 action.params = params;
               }
